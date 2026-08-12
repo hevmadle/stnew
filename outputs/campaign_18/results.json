@@ -1,0 +1,131 @@
+{
+  "campaign": 18,
+  "pre_days": 586,
+  "status": "완료",
+  "reason": null,
+  "sample": {
+    "treated_total": 510,
+    "control_total": 335,
+    "common_support": {
+      "lo": 0.0941,
+      "hi": 0.9808,
+      "n_treated_in_support": 502,
+      "n_control_in_support": 316
+    },
+    "matching": {
+      "method": "1:1 nearest neighbor on logit(p_score), without replacement",
+      "caliper_multiplier": 0.2,
+      "caliper_value_logit": 0.2367,
+      "n_pairs": 228,
+      "treated_match_rate": 0.4471
+    }
+  },
+  "balance": {
+    "ps_features": [
+      "recency",
+      "pre_baskets",
+      "pre_sales",
+      "pre_target_baskets",
+      "pre_coupon_redemptions",
+      "pre_campaign_count"
+    ],
+    "smd_before": {
+      "recency": -0.3736,
+      "pre_baskets": 0.7431,
+      "pre_sales": 0.6485,
+      "pre_target_baskets": 0.8497,
+      "pre_coupon_redemptions": 0.3045,
+      "pre_campaign_count": 0.2822
+    },
+    "smd_after": {
+      "recency": -0.0822,
+      "pre_baskets": 0.0152,
+      "pre_sales": -0.0069,
+      "pre_target_baskets": 0.0469,
+      "pre_coupon_redemptions": 0.0487,
+      "pre_campaign_count": 0.0061
+    },
+    "max_abs_smd_before": 0.8497,
+    "max_abs_smd_after": 0.0822,
+    "threshold": 0.1,
+    "passed": true
+  },
+  "effects": {
+    "primary_target_product": {
+      "target_purchase": {
+        "unadjusted_diff": 0.0725,
+        "unadjusted_ci95": [
+          0.0308,
+          0.1142
+        ],
+        "matched_diff": 0.0219,
+        "matched_ci95": [
+          -0.0277,
+          0.0716
+        ]
+      },
+      "target_sales": {
+        "unadjusted_diff": 47.5011,
+        "unadjusted_ci95": [
+          31.8741,
+          63.1281
+        ],
+        "matched_diff": -2.9639,
+        "matched_ci95": [
+          -21.5824,
+          15.6547
+        ]
+      },
+      "target_quantity": {
+        "unadjusted_diff": 19.5121,
+        "unadjusted_ci95": [
+          13.519,
+          25.5052
+        ],
+        "matched_diff": -0.9079,
+        "matched_ci95": [
+          -8.0353,
+          6.2195
+        ]
+      }
+    },
+    "secondary_overall": {
+      "any_purchase": {
+        "unadjusted_diff": 0.0435,
+        "unadjusted_ci95": [
+          0.0071,
+          0.0799
+        ],
+        "matched_diff": 0.0175,
+        "matched_ci95": [
+          -0.0266,
+          0.0616
+        ]
+      },
+      "total_sales": {
+        "unadjusted_diff": 106.9115,
+        "unadjusted_ci95": [
+          74.6191,
+          139.2039
+        ],
+        "matched_diff": -1.7004,
+        "matched_ci95": [
+          -38.6456,
+          35.2447
+        ]
+      },
+      "baskets": {
+        "unadjusted_diff": 3.972,
+        "unadjusted_ci95": [
+          2.7839,
+          5.1601
+        ],
+        "matched_diff": 0.0658,
+        "matched_ci95": [
+          -1.2994,
+          1.4309
+        ]
+      }
+    }
+  }
+}

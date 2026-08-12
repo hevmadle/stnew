@@ -1,0 +1,114 @@
+{
+  "campaign": 13,
+  "status": "완료",
+  "reason": null,
+  "sample": {
+    "treated_total": 636,
+    "control_total": 458,
+    "common_support": {
+      "lo": 0.0645,
+      "hi": 0.9919,
+      "n_treated_in_support": 634,
+      "n_control_in_support": 435
+    },
+    "matching": {
+      "method": "1:1 nearest neighbor on logit(p_score), without replacement",
+      "caliper_multiplier": 0.2,
+      "caliper_value_logit": 0.2984,
+      "n_pairs": 270,
+      "treated_match_rate": 0.4245
+    }
+  },
+  "balance": {
+    "ps_features": [
+      "recency",
+      "pre_baskets",
+      "pre_sales",
+      "pre_target_baskets",
+      "pre_coupon_redemptions",
+      "pre_campaign_count"
+    ],
+    "max_abs_smd_before": 0.8325,
+    "max_abs_smd_after": 0.0496,
+    "threshold": 0.1,
+    "passed": true
+  },
+  "effects": {
+    "primary_target_product": {
+      "target_purchase": {
+        "unadjusted_diff": 0.0645,
+        "unadjusted_ci95": [
+          0.0321,
+          0.097
+        ],
+        "matched_diff": -0.0111,
+        "matched_ci95": [
+          -0.0504,
+          0.0282
+        ]
+      },
+      "target_sales": {
+        "unadjusted_diff": 47.6307,
+        "unadjusted_ci95": [
+          34.9555,
+          60.3058
+        ],
+        "matched_diff": -3.6491,
+        "matched_ci95": [
+          -19.6807,
+          12.3825
+        ]
+      },
+      "target_quantity": {
+        "unadjusted_diff": 23.1464,
+        "unadjusted_ci95": [
+          17.6525,
+          28.6403
+        ],
+        "matched_diff": 2.037,
+        "matched_ci95": [
+          -4.8048,
+          8.8789
+        ]
+      }
+    },
+    "secondary_overall": {
+      "any_purchase": {
+        "unadjusted_diff": 0.0456,
+        "unadjusted_ci95": [
+          0.0172,
+          0.0739
+        ],
+        "matched_diff": -0.0296,
+        "matched_ci95": [
+          -0.0621,
+          0.0028
+        ]
+      },
+      "total_sales": {
+        "unadjusted_diff": 122.0472,
+        "unadjusted_ci95": [
+          95.1084,
+          148.986
+        ],
+        "matched_diff": -8.1062,
+        "matched_ci95": [
+          -40.9452,
+          24.7328
+        ]
+      },
+      "baskets": {
+        "unadjusted_diff": 4.9485,
+        "unadjusted_ci95": [
+          3.9099,
+          5.987
+        ],
+        "matched_diff": -0.663,
+        "matched_ci95": [
+          -1.696,
+          0.37
+        ]
+      }
+    }
+  }
+}

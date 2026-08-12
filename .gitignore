@@ -1,0 +1,22 @@
+# 가상환경
+.venv/
+venv/
+
+# Python 캐시
+__pycache__/
+*.pyc
+
+# OS
+.DS_Store
+
+# 원본 데이터 — 용량이 커서(transaction_data.csv 135MB) 저장소에 포함하지 않는다.
+# GitHub 단일 파일 하드 리밋(100MB)을 넘어서며, Kaggle 라이선스상 재배포 범위도
+# 별도 확인이 필요하다(SOURCE_AND_LICENSE.md 참고). 배포 환경에는 별도 방법으로
+# 데이터를 연결해야 한다.
+data/raw/*.csv
+
+# Streamlit 로컬 보안 설정(있다면 커밋하지 않음)
+.streamlit/secrets.toml
+
+# Claude Code 로컬 전용 설정(팀 공유 대상 아님)
+.claude/settings.local.json
