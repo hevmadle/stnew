@@ -38,15 +38,39 @@ RAW_DIR = PROJECT_ROOT / "data" / "raw"
 sys.path.insert(0, str(PROJECT_ROOT / "pipeline"))
 
 import rules  # noqa: E402  (pipeline/rules.py — 집단 구성·매칭·게이트 규칙의 단일 출처)
+from ensure_data import ensure_raw_data  # noqa: E402
 from prepare_data import prepare  # noqa: E402
 from estimate_effect import estimate  # noqa: E402
 from profitability import Candidate, DataEstimate, compare_candidates  # noqa: E402
 
 st.set_page_config(page_title="쿠폰 캠페인 분석", page_icon="🎯", layout="wide")
 
+# 클라우드(예: Streamlit Community Cloud)는 저장소만 클론되고 data/raw/ 원본이
+# 없다 — 없으면 GitHub Release 자산에서 내려받는다. 이미 있으면 즉시 반환(no-op).
+if rules.RAW_DIR and any(not (rules.RAW_DIR / f).exists() for f in [
+    "campaign_desc.csv", "campaign_table.csv", "coupon.csv", "coupon_redempt.csv",
+    "hh_demographic.csv", "product.csv", "transaction_data.csv",
+]):
+    with st.spinner("원본 데이터 준비 중 (최초 1회, 약 27MB 다운로드)..."):
+        ensure_raw_data()
+
 COLOR_TREATED = "#2a78d6"
 COLOR_CONTROL = "#eb6834"
-plt.rcParams.update({"font.family": "AppleGothic", "axes.unicode_minus": False})
+
+
+def _pick_korean_font() -> str:
+    """로컬(macOS)엔 AppleGothic이 있지만 Streamlit Cloud(Linux)엔 없다.
+    packages.txt로 설치한 나눔고딕 등 있는 폰트를 자동으로 골라 쓴다."""
+    import matplotlib.font_manager as fm
+    candidates = ["AppleGothic", "NanumGothic", "Noto Sans CJK KR", "Noto Sans KR", "Malgun Gothic"]
+    available = {f.name for f in fm.fontManager.ttflist}
+    for c in candidates:
+        if c in available:
+            return c
+    return "sans-serif"  # 없으면 한글이 깨질 수 있으나 최소한 오류로 죽지는 않는다
+
+
+plt.rcParams.update({"font.family": _pick_korean_font(), "axes.unicode_minus": False})
 
 
 # ---------------------------------------------------------------------

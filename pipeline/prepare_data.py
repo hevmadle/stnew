@@ -24,6 +24,7 @@ from pathlib import Path
 import pandas as pd
 
 import rules
+from ensure_data import ensure_raw_data
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 
@@ -49,6 +50,8 @@ def check_group_size_gate(meta: dict) -> dict:
 
 
 def prepare(campaign_id: int, pre_days: int, verbose: bool = True) -> tuple[pd.DataFrame | None, dict, dict]:
+    ensure_raw_data()  # 로컬에 이미 있으면 즉시 반환(no-op); 없으면 GitHub Release에서 내려받음
+
     if verbose:
         banner("STEP 1", "캠페인 정보조회")
     info = rules.get_campaign_info(campaign_id)
